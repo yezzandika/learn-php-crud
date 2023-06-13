@@ -45,15 +45,32 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav ms-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?= base_url() ?>">Dashboard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?= base_url('user/index.php') ?>">Pengguna</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="<?= base_url('auth/logout.php') ?>">Logout</a>
-                    </li>
+                    <?php 
+                    // menampilkan menu untuk yang sudah login atau belum
+                    if (is_login()) { // Apakah sudah login atau belum
+                    ## MENU JIKA SUDAH LOGIN ##
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?= base_url('dashboard.php') ?>">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?= base_url('user/index.php') ?>">Pengguna</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="<?= base_url('auth/logout.php') ?>">Logout</a>
+                        </li>
+                    <?php 
+                    } else { // 
+                    ## MENU JIKA BELUM LOGIN ##
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?= base_url('auth/login.php') ?>">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="<?= base_url('auth/register.php') ?>">Register</a>
+                        </li>
+                    <?php } ?>
+                    
                 </ul>
             </div>
         </div>

@@ -8,6 +8,15 @@ if (!function_exists('base_url')) {
 	}
 }
 
+## FUNGSI UNTUK MEMANGGIL URL YANG SAAT INI DI KUNJUNGI ##
+if (!function_exists('current_url')) {
+	function current_url(): ?string
+    {    
+        global $config, $_SERVER;
+	    return $config['base']['url'] . ltrim($_SERVER['REQUEST_URI'], '/');
+	}
+}
+
 ## FUNCTION UNTUK MEMANGGIL ASSETS ##
 if (!function_exists('asset')) {
 	function asset(?string $i = null): ?string
@@ -68,19 +77,19 @@ if (!function_exists('is_login')) {
 }
 
 ## FUNGSI UNTUK MENDAPATKAN DATA USER ##
-if (!function_exists('user')) {
-    function user(?string $attr = null) {
-        global $_SESSION, $db;
-		require 'library/class/User.php';
-		$userClass = new User($db->getConnection()); 
-        if (!isset($_SESSION['user']['id'])) {
-			return false;
-		}
-		$userClass->id = $_SESSION['user']['id'];
-        $user = $userClass->checkById();
-        if ($user == false) {
-			return false;
-		}
-        return !is_null($attr) ? $user[$attr] : $user['id'];
-    }
-}
+// if (!function_exists('user')) {
+//     function user(?string $attr = null) {
+//         global $_SESSION, $db;
+// 		require 'library/class/User.php';
+// 		$userClass = new User($db->getConnection()); 
+//         if (!isset($_SESSION['user']['id'])) {
+// 			return false;
+// 		}
+// 		$userClass->id = $_SESSION['user']['id'];
+//         $user = $userClass->checkById();
+//         if ($user == false) {
+// 			return false;
+// 		}
+//         return !is_null($attr) ? $user[$attr] : $user['id'];
+//     }
+// }

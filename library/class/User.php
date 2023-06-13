@@ -54,7 +54,7 @@ class User {
         $query = "UPDATE `users` SET `name`= ?,`username`= ?,`password`= ? WHERE `id` = ?" ;
         $stmt = $this->db->prepare($query);
         //BIND VALUES
-        $stmt->bind_param("sss", $this->name, $this->username, $this->password, $this->id);
+        $stmt->bind_param("sssi", $this->name, $this->username, $this->password, $this->id);
         if($stmt->execute()){
             return true;
         }
@@ -95,10 +95,27 @@ class User {
         if($result->num_rows > 0){
             $user = $result->fetch_assoc();
             if ($user['password'] == $this->password) {
-                $_SESSION['user']['id'] = $user['id']; // set session $_SESSION['user']['id'] dengan id user
+                $_SESSION['user'] = $user; // set session $_SESSION['user']['id'] dengan id user
                 return true;
             }
             return false;
+        }
+        return false;
+    }
+
+    public function get_all()
+    {
+        $query = "SELECT * FROM ". $this->table;
+        $stmt = $this->db->prepare($query);
+        //BIND VALUES
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if($result->num_rows > 0){
+            $rows = [];
+            while ($row = $result->fetch_assoc()) {
+                $rows[] = $row;
+            }
+            return $rows;
         }
         return false;
     }

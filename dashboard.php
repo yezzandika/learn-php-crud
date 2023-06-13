@@ -1,9 +1,9 @@
 <?php
 require 'config.php';
-require 'layouts/header.php';
 if (is_login() == false) {
     exit(redirect(base_url('auth/login.php')));
 }
+require 'layouts/header.php';
 ?>
 <div class="row justify-content-center">
     <div class="col-md-12">
@@ -17,7 +17,7 @@ if (is_login() == false) {
                 </h5>
             </div>
             <div class="card-body">
-                <p>Haii, <strong><?= user('name') ?></strong></p>
+                <p>Haii, <strong><?= $_SESSION['user']['name'] ?></strong></p>
             </div>
         </div>
     </div>

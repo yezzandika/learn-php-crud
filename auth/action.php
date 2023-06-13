@@ -9,6 +9,7 @@ if (is_method('post')) {
 
         if ($userClass->login() == true) {
             $_SESSION['login'] = true; // set session $_SESSION['login'] menjadi true
+            $_SESSION['login'] = true; // set session $_SESSION['login'] menjadi true
             flashdata(['alert' => 'success', 'title' => 'Berhasil!', 'msg' => 'Login berhasil !.']);
             exit(redirect(base_url('dashboard.php')));
         } else {
@@ -25,7 +26,7 @@ if (is_method('post')) {
             flashdata(['alert' => 'danger', 'title' => 'Gagal!', 'msg' => 'Username sudah digunakan !.']);
             exit(redirect(base_url('auth/register.php')));
         } else {
-            if ($userClass->register() == 'OK') {
+            if ($userClass->register()) {
                 flashdata(['alert' => 'success', 'title' => 'Berhasil!', 'msg' => 'Register berhasil !.']);
                 exit(redirect(base_url('auth/register.php')));
             } else {
