@@ -37,6 +37,42 @@ class User {
         return false;
     }
 
+    public function create()
+    {
+        $query = "INSERT INTO " . $this->table . "(name, username, password) VALUES (?,?,?)" ;
+        $stmt = $this->db->prepare($query);
+        //BIND VALUES
+        $stmt->bind_param("sss", $this->name, $this->username, $this->password);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
+
+    public function update()
+    {
+        $query = "UPDATE `users` SET `name`= ?,`username`= ?,`password`= ? WHERE `id` = ?" ;
+        $stmt = $this->db->prepare($query);
+        //BIND VALUES
+        $stmt->bind_param("sss", $this->name, $this->username, $this->password, $this->id);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
+
+    public function delete()
+    {
+        $query = "DELETE FROM `users` WHERE `id` = ?" ;
+        $stmt = $this->db->prepare($query);
+        //BIND VALUES
+        $stmt->bind_param("s", $this->id);
+        if($stmt->execute()){
+            return true;
+        }
+        return false;
+    }
+
     public function register()
     {
         $query = "INSERT INTO " . $this->table . "(name, username, password) VALUES (?,?,?)" ;
