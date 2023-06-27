@@ -1,4 +1,13 @@
 <?php
+abstract class UserAbstract {
+    abstract public function checkById();
+    abstract public function checkByUsername();
+    abstract public function create();
+    abstract public function update();
+    abstract public function delete();
+    abstract public function register();
+    abstract public function login();
+}
 class User {
     protected $db;
     protected $table = 'users';
